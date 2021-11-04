@@ -1,58 +1,38 @@
 import 'package:flutter/material.dart';
+import 'quote.dart';
 
 void main() =>
-    runApp(MaterialApp(
-        home: Home()
+    runApp(const MaterialApp(
+      home: QuoteList(),
     ));
 
-class Home extends StatelessWidget {
-  // const Home({Key? key}) : super(key: key);
+class QuoteList extends StatefulWidget {
+  const QuoteList({Key? key}) : super(key: key);
+
+  @override
+  _QuoteListState createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
+
+  List<Quote> quotes = [
+    Quote(text: 'Be yourself; everyone else is already taken', author: 'Oscar Wilde'),
+    Quote(text: 'I have nothing to declare except my genius', author: 'Oscar Wilde'),
+    Quote(text: 'The truth is rarely pure and never simple', author: 'Oscar Wilde')
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('First App'),
+        title: const Text('Awesome Quotes'),
         centerTitle: true,
-        backgroundColor: Colors.deepOrange[900],
+        backgroundColor: Colors.redAccent,
       ),
-      body: Row(
-        children: <Widget>[
-          Expanded(
-            child: Image.asset('assets/space-2.jpg'),
-            flex: 3,
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(30.0),
-              color: Colors.lime,
-              child: const Text('1'),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(30.0),
-              color: Colors.orange,
-              child: const Text('2'),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(30.0),
-              color: Colors.purpleAccent,
-              child: const Text('3'),
-            ),
-          ),
-        ],
+      body: Column(
+        children: quotes.map((quote)=> Text('${quote.text} - ${quote.author}')).toList(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {  },
-        child: const Text('click'),
-        backgroundColor: Colors.deepOrange[900],
-      )
     );
   }
 }
